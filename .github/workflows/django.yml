@@ -27,5 +27,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        cd Agora/AgoraProject
-        python manage.py test
+        python /home/runner/work/Agora/AgoraProject/manage.py test

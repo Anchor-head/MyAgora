@@ -13,3 +13,4 @@ pydantic-core==2.18.4
 git+https://github.com/openai/whisper.git
 django-cors-headers
 djangorestframework
+djangorestframework-simplejwt

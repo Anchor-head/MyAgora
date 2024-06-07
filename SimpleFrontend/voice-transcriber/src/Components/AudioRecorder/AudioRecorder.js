@@ -1,10 +1,12 @@
 // src/AudioRecorder.js
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback ,useContext} from 'react';
+import { UserContext } from '../../Contexts/UserContext';
 import { ReactMediaRecorder } from 'react-media-recorder';
 import axios from 'axios';
 import './AudioRecorder.css';
 
 const AudioRecorder = () => {
+  const { user } = useContext(UserContext);
   const [transcription, setTranscription] = useState('');
 
   const handleStop = useCallback(async (blobUrl, blob) => {
@@ -26,6 +28,7 @@ const AudioRecorder = () => {
 
   return (
     <div className="audio-recorder">
+      {user && <p>Logged in as: {user.username}</p>}
       <ReactMediaRecorder
         audio
         blobPropertyBag={{ type: 'audio/wav' }}

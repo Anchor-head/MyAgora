@@ -16,12 +16,15 @@ class TranscribeAudio(APIView):
     def post(self, request, *args, **kwargs):
         print("im posting--------------")
         file = request.FILES['file']
+        username = request.data.get('username')
+        print(f"Received username: {username}")  # Print the received username for debugging
+
         file_name = default_storage.save(file.name, file)
         try:
             transcription = transcribe_audio_file(file_name)
-            print("result of transcription: ", transcription)
+            print(f"User: {username}, Transcription: {transcription}")
             aiResponse = generateResponse(transcription)
-            print("ai response: ",aiResponse)
+            print("AI response: ", aiResponse)
         finally:
             default_storage.delete(file_name)
         return Response({"transcription": aiResponse})

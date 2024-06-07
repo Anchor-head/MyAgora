@@ -26,7 +26,6 @@ const AudioRecorder = () => {
 
   return (
     <div className="audio-recorder">
-      <h1>Voice Recorder</h1>
       <ReactMediaRecorder
         audio
         blobPropertyBag={{ type: 'audio/wav' }}
@@ -42,7 +41,7 @@ const AudioRecorder = () => {
             >
               Hold to Record
             </button>
-            <p>Transcription: {transcription}</p>
+            <p>{transcription}</p>
           </div>
         )}
       />

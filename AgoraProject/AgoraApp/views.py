@@ -11,8 +11,11 @@ class TranscribeAudio(APIView):
         print("im posting--------------")
         file = request.FILES['file']
         file_name = default_storage.save(file.name, file)
-        transcription = transcribe_audio_file(file_name)
-        print("result of transcription: ",transcription)
+        try:
+            transcription = transcribe_audio_file(file_name)
+            print("result of transcription: ", transcription)
+        finally:
+            default_storage.delete(file_name)
         return Response({"transcription": transcription})
 
 # Create your views here.

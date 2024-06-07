@@ -14,9 +14,10 @@ const AudioRecorder = () => {
     try {
       const response = await axios.post('http://localhost:8000/transcribe/', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+            'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(response.data)
       setTranscription(response.data.transcription);
     } catch (error) {
       console.error('Error transcribing audio:', error);

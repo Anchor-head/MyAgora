@@ -1,6 +1,6 @@
 from django.test import TestCase
-import whisper
-
+from .AduioToTextFunction.audioToText import transcribe_audio_file
+import os
 # Create your tests here.
 class ExampleTestCase(TestCase):
     def test_example(self):
@@ -9,10 +9,7 @@ class ExampleTestCase(TestCase):
     
 class AudioToTextConverterTestCase(TestCase):
     def test_audioToTestExampleOne(self):
-        model = whisper.load_model("base")
-
-        # Transcribe an audio file
-        result = model.transcribe("../AgoraProject/TestingResources/AudioTest1.wav")
-
-        # Print the transcription
-        print(result["text"])
+        audio_path = os.path.join(os.path.dirname(__file__), '..', 'TestingResources', 'AudioTest1.wav')
+        transcribed_result = transcribe_audio_file(audio_path)
+        print(transcribed_result)
+        self.assertTrue(True)

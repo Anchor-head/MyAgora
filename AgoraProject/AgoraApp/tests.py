@@ -17,7 +17,9 @@ class AudioToTextConverterTestCase(TestCase):
     #     self.assertTrue(True)
 
     def test_openai_APIs(self):
-        response = generateResponse("when is the best time to fart?")
+        response = generateResponse("reply me with one sentence")
+        print(response)
+        response = generateResponse("is threesome healthy?")
         print(response)
 
 

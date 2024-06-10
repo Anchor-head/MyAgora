@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from AgoraApp.views import TranscribeAudio,DebateUserListCreate,DebateUserDetail,get_user_by_username,delete_user_by_username
+from AgoraApp.views import TranscribeAudio,DebateUserListCreate,DebateUserDetail,SpeechHistoryListCreate,SpeechHistoryDetail,get_user_by_username,delete_user_by_username
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,7 @@ urlpatterns = [
     path('debateusers/<int:pk>/', DebateUserDetail.as_view(), name='debateuser-detail'),
     path('debateusers/username/<str:username>/', get_user_by_username, name='get-user-by-username'),
     path('debateusers/username/<str:username>/delete/', delete_user_by_username, name='delete-user-by-username'),
+    path('speechhistories/', SpeechHistoryListCreate.as_view(), name='speechhistory-list-create'),
+    path('speechhistories/<int:pk>/', SpeechHistoryDetail.as_view(), name='speechhistory-detail'),
+
 ]

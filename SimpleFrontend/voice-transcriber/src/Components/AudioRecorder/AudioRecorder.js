@@ -49,6 +49,11 @@ const AudioRecorder = () => {
             >
               Hold to Record
             </button>
+            <button
+              className="delete-history-button"
+            >
+              Click to Delete Chat History
+            </button>
             <p>{transcription}</p>
           </div>
         )}

@@ -9,8 +9,7 @@ class DebateUser(models.Model):
 
 class SpeechHistory(models.Model):
     user = models.OneToOneField(DebateUser, on_delete=models.CASCADE)
-    input_contents = models.JSONField(default=list)
-    reply_contents = models.JSONField(default=list)
+    content = models.JSONField(default=list)
 
     def __str__(self):
         return f"SpeechHistory for {self.user.username}"

@@ -31,7 +31,6 @@ def ensure_speech_history_for_user(username):
 class TranscribeAudio(APIView):
     parser_classes = (MultiPartParser, FormParser)
     def post(self, request, *args, **kwargs):
-        chatMemory = []
         print("im posting--------------")
         file = request.FILES['file']
         username = request.data.get('username')
@@ -45,17 +44,12 @@ class TranscribeAudio(APIView):
         file_name = default_storage.save(file.name, file)
         try:
             transcription = transcribe_audio_file(file_name)
-            speech_history.input_contents.append(transcription)
+            speech_history.content.append({'role': 'user', 'content':transcription})
             speech_history.save()
             print(f"User: {username}, Transcription: {transcription}")
-            chatMemory.append({'role': 'user', 'content':speech_history.input_contents[0]})
-
-            for i in range(1, len(speech_history.input_contents)):
-                chatMemory.append({'role':'assistant','content':speech_history.reply_contents[i-1]})
-                chatMemory.append({'role': 'user', 'content':speech_history.input_contents[i]})
-            aiResponse = generateResponse(chatMemory)
+            aiResponse = generateResponse(speech_history.content)
             #store data into history
-            speech_history.reply_contents.append(aiResponse)
+            speech_history.content.append({'role': 'assistant', 'content':aiResponse})
             speech_history.save()
             print("AI response: ", aiResponse)
 

@@ -25,6 +25,5 @@ urlpatterns = [
     path('debateusers/username/<str:username>/', get_user_by_username, name='get-user-by-username'),
     path('debateusers/username/<str:username>/delete/', delete_user_by_username, name='delete-user-by-username'),
     path('speechhistories/', SpeechHistoryListCreate.as_view(), name='speechhistory-list-create'),
-    path('speechhistories/<int:pk>/', SpeechHistoryDetail.as_view(), name='speechhistory-detail'),
-
+    path('speechhistories/<int:user_id>/', SpeechHistoryDetail.as_view(), name='speechhistory-detail'),
 ]

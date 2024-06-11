@@ -73,7 +73,16 @@ class SpeechHistoryListCreate(generics.ListCreateAPIView):
 class SpeechHistoryDetail(generics.RetrieveDestroyAPIView):
     queryset = SpeechHistory.objects.all()
     serializer_class = SpeechHistorySerializer
-
+    def get_object(self):
+        user_id = self.kwargs['user_id']
+        try:
+            user = DebateUser.objects.get(id=user_id)
+            return SpeechHistory.objects.get(user=user)
+        except DebateUser.DoesNotExist:
+            raise NotFound(detail="User not found")
+        except SpeechHistory.DoesNotExist:
+            raise NotFound(detail="Speech history not found")
+        
 @api_view(['GET'])
 def get_user_by_username(request, username):
     try:

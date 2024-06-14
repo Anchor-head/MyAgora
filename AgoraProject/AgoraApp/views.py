@@ -103,3 +103,17 @@ def delete_user_by_username(request, username):
         return Response(status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['DELETE'])
+def delete_speech_history_by_username(request, username):
+    try:
+        user = DebateUser.objects.get(username=username)
+        speech_history = SpeechHistory.objects.get(user=user)
+        speech_history.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except DebateUser.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    except SpeechHistory.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

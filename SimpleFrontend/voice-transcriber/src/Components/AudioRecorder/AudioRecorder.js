@@ -31,6 +31,15 @@ const AudioRecorder = () => {
     }
   }, [user]);
 
+  const handleDeleteSpeechHistory = useCallback(async () => {
+    try {
+      await axios.delete(`http://localhost:8000/speechhistories/username/${user.username}/delete/`);
+      console.log('Speech history deleted');
+    } catch (error) {
+      console.error('Error deleting speech history:', error);
+    }
+  }, [user]);
+
   return (
     <div className="audio-recorder">
       {user && <p>Logged in as: {user.username}</p>}
@@ -50,9 +59,10 @@ const AudioRecorder = () => {
               Hold to Record
             </button>
             <button
+              onClick={handleDeleteSpeechHistory}
               className="delete-history-button"
             >
-              Click to Delete Chat History
+              Delete Speech History
             </button>
             <p>{transcription}</p>
           </div>
